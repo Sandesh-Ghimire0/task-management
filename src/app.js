@@ -20,3 +20,9 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('public')) 
 
 app.use(cookieParser()) // it is used to read and write the cookies from the user browser
+
+
+//-----------------------------------------------------------------------------------------
+
+import { taskRouter } from './routes/task.route.js'
+app.use('/api/task',taskRouter)
