@@ -8,6 +8,19 @@ const taskSchema = new Schema(
         },
         description:{
             type:String,
+        },
+        status:{
+            type:String,
+            enum:['pending','in-progress','completed','delayed'],
+            default:'pending'
+        },
+        priority:{
+            type:String,
+            enum:['low','medium','high'],
+            default:'medium'
+        },
+        dueDate:{
+            type:Date,
         }
     }
 ,{timestamps:true})

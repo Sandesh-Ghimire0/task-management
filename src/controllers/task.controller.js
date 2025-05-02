@@ -32,7 +32,7 @@ const addTask = asyncHandler( async (req, res)=>{
         - return response
     */ 
     console.log(req.body)
-    const {title, description} = req.body
+    const {title, description,status, priority, dueDate} = req.body
 
     if (!title){
         throw new ApiError(400,"Title is required")
@@ -41,7 +41,10 @@ const addTask = asyncHandler( async (req, res)=>{
 
     const task = await Task.create({
         title,
-        description
+        description,
+        status,
+        priority,
+        dueDate
     })
 
     const createdTask = await Task.findById(task._id)
