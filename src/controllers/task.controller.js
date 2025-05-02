@@ -66,7 +66,28 @@ const addTask = asyncHandler( async (req, res)=>{
     )
 })
 
+const deleteTask = asyncHandler( async (req, res)=>{
+    const {_id} = req.body
+
+    if(!_id){
+        throw new ApiError(400,"id not given to delete task")
+    }
+
+    await Task.findByIdAndDelete(_id)
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            [],
+            "Task deleted successfully"
+        )
+    )
+})
+
 export {
     addTask,
-    getAllTasks
+    getAllTasks,
+    deleteTask
 }
