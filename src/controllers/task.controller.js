@@ -67,6 +67,7 @@ const addTask = asyncHandler( async (req, res)=>{
 })
 
 const deleteTask = asyncHandler( async (req, res)=>{
+    console.log(req.body)
     const {_id} = req.body
 
     if(!_id){
@@ -86,8 +87,56 @@ const deleteTask = asyncHandler( async (req, res)=>{
     )
 })
 
+
+const updateTask = asyncHandler( async (req, res)=>{
+
+    /*
+        - get all the updated data from the body
+        - check if id is avialable
+        - update the data using findbyidandupdate method
+        - check if data is updated or not
+        - return the updated data as response
+    */
+    const {_id, title, description, status, priority, dueDate} = req.body
+
+    if(!_id){
+        throw new ApiError(400, "Id not available for update")
+    }
+
+    const updatedTask = await Task.findByIdAndUpdate(
+        _id,
+        {
+            title,
+            description,
+            status,
+            priority,
+            dueDate
+        },
+        {
+            new:true
+        }
+    )
+
+    if(!updatedTask){
+        throw new ApiError(400, "Something went wrong while updating the task")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            updatedTask,
+            "Task updated successfully"
+        )
+    )
+
+
+})
+
 export {
     addTask,
     getAllTasks,
-    deleteTask
+    deleteTask,
+    updateTask
 }
