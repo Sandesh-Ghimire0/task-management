@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import passport from '../src/middlewares/localAuth.middleware.js'
+
 
 export const app = express()
 
@@ -21,8 +23,13 @@ app.use(express.static('public'))
 
 app.use(cookieParser()) // it is used to read and write the cookies from the user browser
 
+app.use(passport.initialize())
+
 
 //-----------------------------------------------------------------------------------------
 
 import { taskRouter } from './routes/task.route.js'
+import { userRouter } from './routes/user.route.js'
+
 app.use('/api/task',taskRouter)
+app.use('/api/user',userRouter)
