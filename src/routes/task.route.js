@@ -9,7 +9,7 @@ export const taskRouter = Router()
 // const localAuthMiddleware = passport.authenticate('local',{session:false})
 
 // taskRouter.route('/tasks').get(localAuthMiddleware,getAllTasks)
-taskRouter.route('/tasks').get(verifyJWT,getAllTasks)
+taskRouter.route('/tasks').get(verifyJWT, getAllTasks)
 taskRouter.route('/add-task').post(addTask)
 taskRouter.route('/delete-task').post(deleteTask)
 taskRouter.route('/update-task').put(updateTask)
