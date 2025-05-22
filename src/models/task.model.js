@@ -21,6 +21,11 @@ const taskSchema = new Schema(
         },
         dueDate:{
             type:Date,
+        },
+        user:{
+            type:Schema.Types.ObjectId,
+            ref:'User',
+            require:true
         }
     }
 ,{timestamps:true})

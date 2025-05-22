@@ -6,7 +6,8 @@ import { Task } from "../models/task.model.js";
 
 
 const getAllTasks = asyncHandler( async (req, res)=>{
-    const tasks = await Task.find()
+    console.log(req.user)
+    const tasks = await Task.find({user:req.user?._id})
 
     if(!tasks){
         throw new ApiError(400, "something went wrong while retrivieng the tasks")
@@ -31,7 +32,6 @@ const addTask = asyncHandler( async (req, res)=>{
         - create task object in db
         - return response
     */ 
-    console.log(req.body)
     const {title, description,status, priority, dueDate} = req.body
 
     if (!title){
@@ -44,12 +44,12 @@ const addTask = asyncHandler( async (req, res)=>{
         description,
         status,
         priority,
-        dueDate
+        dueDate,
+        user:req.user?._id
     })
 
     const createdTask = await Task.findById(task._id)
 
-    console.log(createdTask)
 
     if(!createdTask){
         throw new ApiError(400, "Something went wrong while adding the task")
