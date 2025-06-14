@@ -48,7 +48,6 @@ const registerUser = asyncHandler( async (req, res)=>{
 
 const login = asyncHandler( async (req, res)=>{
     const {email, password} = req.body
-    console.log(email, password)
     if(!email && !password){
         throw new ApiError(400, "Email and password is required")
     }
@@ -59,7 +58,6 @@ const login = asyncHandler( async (req, res)=>{
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password)
-    console.log(isPasswordValid)
     if(!isPasswordValid){
         throw new ApiError(400, "Incorrect password")
     }

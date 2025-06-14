@@ -6,7 +6,6 @@ import { Task } from "../models/task.model.js";
 
 
 const getAllTasks = asyncHandler( async (req, res)=>{
-    console.log(req.user)
     const tasks = await Task.find({user:req.user?._id})
 
     if(!tasks){
@@ -67,7 +66,6 @@ const addTask = asyncHandler( async (req, res)=>{
 })
 
 const deleteTask = asyncHandler( async (req, res)=>{
-    console.log(req.body)
     const {_id} = req.body
 
     if(!_id){
